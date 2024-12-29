@@ -1,1 +1,1 @@
-my first project using github, gitbash, vscode, git
+my first time using github, gitbash, vscode, git
