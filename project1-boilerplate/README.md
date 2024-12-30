@@ -24,4 +24,20 @@ you can directly add text to files by "echo <message> >> <file>"
 
 you can use -r flag on copy ("cp") to copy the entire file. "cp -r <what is being copied> <where it is being pasted to>". No need to make a new folder, since cp and mkdir goes together
 
-hello
+
+
+
+
+psql
+
+you start with "sql --username=freecodecamp --dbname=postgres". this shows what your username is when connecting to databases
+
+
+commands must end with semi colon;
+
+to make a data base we use CREATE DATABASE second_database
+
+
+command to list is " \l "
+
+you can connect to databases by \c
