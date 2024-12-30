@@ -21,3 +21,7 @@ put path before file name to place it into where you want it to go when using to
 rmdik is used to remove directories, but it must be empty, however you can use a -r flag that remove directories and their contents recursively. Using this removes the content inside the directories but the content inside does not go into the trash, it's just gone. must be careful when using -r
 
 you can directly add text to files by "echo <message> >> <file>"
+
+you can use -r flag on copy ("cp") to copy the entire file. "cp -r <what is being copied> <where it is being pasted to>". No need to make a new folder, since cp and mkdir goes together
+
+
