@@ -24,4 +24,4 @@ you can directly add text to files by "echo <message> >> <file>"
 
 you can use -r flag on copy ("cp") to copy the entire file. "cp -r <what is being copied> <where it is being pasted to>". No need to make a new folder, since cp and mkdir goes together
 
-
+hello
