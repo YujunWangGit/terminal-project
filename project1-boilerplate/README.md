@@ -432,3 +432,7 @@ example output:
 |            1 |         3 |            1 | Mario  | Mushroom Kingdom | Red            |         3 | duck   |
 +--------------+-----------+--------------+--------+------------------+----------------+-----------+--------+
 (21 rows)
+
+
+example of adding primary key to non existing column
+ALTER TABLE galaxy ADD COLUMN galaxy_id SERIAL PRIMARY KEY; 
