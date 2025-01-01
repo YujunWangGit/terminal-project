@@ -436,3 +436,157 @@ example output:
 
 example of adding primary key to non existing column
 ALTER TABLE galaxy ADD COLUMN galaxy_id SERIAL PRIMARY KEY; 
+
+
+
+
+
+scripting
+
+
+you can use bash or sh to execute a script depending on which terminal you want them to go through
+if you havea default terminal set, you use ./ in front of the file
+
+
+you can find the absolute path by doing "which bash"
+you can set default terminal by adding the absolute path of the terminal at the top of the script file, example like "#!/bin/bash" THIS IS called a "shebang"
+
+-rw-r--r-- these are permissions
+
+r means read, w means write, x means execute
+
+chmod +x questionnaire.sh gives everyone executable permissinos
+
+bash can have variable but there cant be spaces between = sign. also must have "" around values
+you must place a $ in front of variables to use them
+you can use * to select all variables
+you can use the number of the variables to select that one specifically
+
+
+
+must make variable first before you can use it. bash runs from top to bottom
+you use "read variable_name" to store user input variables. it gets stored inside the variable
+
+man stands for manual. you can use it to find more information about a command.
+
+you can click ctrl+C to close a program if u dont want to input the values.
+
+
+echo: Prints text to the terminal.
+-e: Enables interpretation of backslash-escaped characters like \n for newlines.
+"\n~~ Questionnaire ~~\n": The text being printed, with \n adding a blank line before and after "~~ Questionnaire ~~".
+
+you can comment by adding # before script.
+note: shebang starts with # but it isnt considered a comment, it is a special characters
+
+
+
+example syntax of if statements in bash
+
+if [[ CONDITION ]]
+then
+  STATEMENTS
+else
+  STATEMENTS
+fi
+
+You can compare integers inside the brackets ([[ ... ]]) of your if with -eq (equal), -ne (not equal), -lt (less than), -le (less than or equal), -gt (greater than), -ge (greater than or equal).
+
+for example, you must use -le instead of <=
+
+
+
+
+
+example: [[ 4 -ge 5 ]]; echo $?
+
+you must print out the exit status of an expression if youre directly sending it into the terminal.
+0= true, 0 means it has 0 errors, making it true
+1= false
+
+
+bash for loop syntax
+
+for (( i = 10; i > 0; i-- ))
+do
+  echo $i
+done
+
+you can make multiline comments like this:
+
+: '
+  comment here
+  more comment here
+'
+
+while loop syntax: 
+
+while [[ CONDITION ]]
+do
+  STATEMENTS
+done
+
+
+
+
+
+
+you can use command printenv to view the enviroment variables of the shell
+
+
+bash syntax for elif
+
+if (( CONDITION ))
+then
+  STATEMENTS
+elif [[ CONDITION ]]
+then
+  STATEMENTS
+fi
+
+
+this is a good example of the differences between (()) and [[]]:
+they're used differently as seen below.
+
+
+if (( NUMBER <= 15 ))
+then
+  echo $TEXT B:$NUMBER
+elif [[ $NUMBER -le 30 ]]
+then
+  echo $TEXT I:$NUMBER
+elif (( NUMBER < 46 ))
+then 
+  echo $TEXT N:$NUMBER
+elif [[ $NUMBER -lt 61 ]]
+then
+  echo $TEXT G:$NUMBER
+else
+  echo $TEXT O:$NUMBER
+fi
+
+
+
+bash syntax creating function:
+FUNCTION_NAME() {
+  STATEMENTS
+}
+
+no need for $ before function when calling it
+
+
+bash syntax creating until statement
+
+until [[ CONDITION ]]
+do
+  STATEMENTS
+done
+
+
+
+
+
+you can view the command's type by running command
+type <command>
+
+
