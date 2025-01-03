@@ -40,7 +40,7 @@ Database > Schema > Table > Column > Row
 
 
 
-you start with "sql --username=freecodecamp --dbname=postgres". this shows what your username is when connecting to databases
+you start with "psql --username=freecodecamp --dbname=postgres". this shows what your username is when connecting to databases
 
 
 commands must end with semi colon;
@@ -590,3 +590,47 @@ you can view the command's type by running command
 type <command>
 
 
+
+
+
+cat courses.csv | while IFS="," read MAJOR COURSE
+do
+  echo $MAJOR
+done
+
+this is an IFS, internal field seperator. in this case, it seperates two things if theres a comma there.
+default IFS is a space.
+
+for the example above, The while loop continues to process lines until the input from cat courses.csv is exhausted (i.e., no more lines to read). 
+
+"|" Pipes content to the next command.
+
+
+
+PSQL="psql -X --username=freecodecamp --dbname=students --no-align --tuples-only -c"
+This will allow you to query your database from your script. The important parts are the username, dbname, and the -c flag that is for running a single command and exiting. The rest of the flags are for formatting.
+
+example of using that
+INSERT_MAJOR_RESULT=$($PSQL "INSERT INTO majors(major) VALUES('$MAJOR')")
+
+
+
+
+
+if [[ -z $MAJOR_ID ]]
+-z checks if it is empty
+
+
+
+
+
+
+TRUNCATE deletes all rows from a table
+
+
+
+example of dumping:
+
+pg_dump --clean --create --inserts --username=freecodecamp students > students.sql
+
+dump the database into a students.sql file. It will save all the commands needed to rebuild it. Take a quick look at the file when you are done.
