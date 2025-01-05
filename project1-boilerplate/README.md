@@ -634,3 +634,220 @@ example of dumping:
 pg_dump --clean --create --inserts --username=freecodecamp students > students.sql
 
 dump the database into a students.sql file. It will save all the commands needed to rebuild it. Take a quick look at the file when you are done.
+
+
+
+
+
+
+
+SELECT MIN(<column>) FROM <table>
+
+you can select specifics from table like this
+
+you can even add up a column, or even get AVG (average)
+SELECT SUM(major_id) FROM students; 
+
+
+
+ROUND(<number_to_round>, <decimals_places>) you can round things to specific decimal places
+
+
+students=> SELECT COUNT(*) FROM majors;
+students=>      
++-------+
+| count |
++-------+
+|     7 |
++-------+
+
+you can count the amount of rows something have
+
+DISTINCT is a function that will show you only unique values. You can use it like this: DISTINCT(<column>)
+GROUP BY can achieve the same results as DISTINCT, Here's an example of how to use GROUP BY: SELECT <column> FROM <table> GROUP BY <column>
+
+but with GROUP BY you can add any of the aggregate functions (MIN, MAX, COUNT, etc) to it to find more information. For instance, if you wanted to see how many students were in each major 
+You could use SELECT COUNT(*) FROM students GROUP BY major_id
+
+
+You can rename a column with AS like this: SELECT <column> AS <new_column_name>
+
+
+
+joining 2 tables linked with a foreign key 
+
+SELECT * FROM <table_1> FULL JOIN <table_2> ON <table_1>.<foreign_key_column> = <table_2>.<foreign_key_column>;
+
+The FULL JOIN you used will include all rows from both tables, whether or not they have a row using that foreign key in the other
+
+A LEFT JOIN gets all rows from the left table, but only rows from the right table that are linked to from the left one
+
+there is also a RIGHT JOIN and INNER JOIN
+
+
+The INNER JOIN only returns rows if they have a value in the foreign key column of the opposite table.
+
+
+
+A RIGHT JOIN (also called a RIGHT OUTER JOIN) includes:
+
+All rows from the right table (students in this case).
+Matching rows from the left table (majors).
+If there is no match in the left table, the result will include NULL values for the columns from the left table.
+2. The ON Clause:
+The ON clause specifies the condition used to match rows from the two tables:
+
+sql
+Copy code
+majors.major_id = students.major_id
+This means rows from majors and students are joined where their major_id values match.
+
+
+
+The SQL query:
+
+sql
+Copy code
+SELECT * 
+FROM majors 
+RIGHT JOIN students 
+ON majors.major_id = students.major_id;
+is performing a RIGHT JOIN between two tables: majors and students, and selecting all columns from the resulting joined table.
+
+Step-by-Step Explanation:
+1. What is a RIGHT JOIN?
+A RIGHT JOIN (also called a RIGHT OUTER JOIN) includes:
+
+All rows from the right table (students in this case).
+Matching rows from the left table (majors).
+If there is no match in the left table, the result will include NULL values for the columns from the left table.
+2. The ON Clause:
+The ON clause specifies the condition used to match rows from the two tables:
+
+sql
+Copy code
+majors.major_id = students.major_id
+This means rows from majors and students are joined where their major_id values match.
+3. Selecting *:
+The SELECT * part means that all columns from both tables will be included in the result.
+
+Example Scenario:
+Table: majors
+major_id	major_name
+1	Computer Science
+2	Mathematics
+3	Biology
+Table: students
+student_id	student_name	major_id
+101	Alice	1
+102	Bob	2
+103	Charlie	4
+What Happens in the Query:
+For each row in students, the query tries to find a matching row in majors where majors.major_id = students.major_id.
+
+If a match is found, the columns from both tables are included in the result.
+
+If no match is found, columns from the left table (majors) are filled with NULL.
+
+
+
+
+you can use USING()
+
+like this 
+SELECT * FROM students FULL JOIN majors USING(major_id);
+
+it's a shortcut way when there's a foreign key, so you dont need to type out the entire thing to join tables
+however, 2 of the columns become 1 when using USING()
+
+
+you can join 3 tables using this method:
+SELECT * FROM <table_1> FULL JOIN <table_2> USING(<column>) FULL JOIN <table_3> USING(<column>)
+
+you can join as many tables are you want this way...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#!/bin/bash
+#Info about my computer science students from students database
+
+
+echo -e "\n~~ My Computer Science Students ~~\n"
+
+PSQL="psql -X --username=freecodecamp --dbname=students --no-align --tuples-only -c"
+
+echo -e "\nFirst name, last name, and GPA of students with a 4.0 GPA:"
+
+echo "$($PSQL "SELECT first_name, last_name, gpa FROM students WHERE gpa = 4.0")"
+
+echo -e "\nAll course names whose first letter is before 'D' in the alphabet:"
+
+echo "$($PSQL "SELECT course FROM courses WHERE course < 'D'")"
+
+echo -e "\nFirst name, last name, and GPA of students whose last name begins with an 'R' or after and have a GPA greater than 3.8 or less than 2.0:"
+
+echo "$($PSQL "SELECT first_name, last_name, gpa FROM students WHERE last_name >= 'R' AND (gpa > 3.8 OR gpa < 2.0)")"
+
+echo -e "\nLast name of students whose last name contains a case insensitive 'sa' or have an 'r' as the second to last letter:"
+
+echo "$($PSQL "SELECT last_name FROM students WHERE last_name ILIKE '%sa%' OR last_name LIKE '%r_'")"
+
+echo -e "\nFirst name, last name, and GPA of students who have not selected a major and either their first name begins with 'D' or they have a GPA greater than 3.0:"
+
+echo "$($PSQL "SELECT first_name, last_name, gpa FROM students WHERE major_id IS NULL AND (first_name LIKE 'D%' OR gpa > 3.0)")"
+
+echo -e "\nCourse name of the first five courses, in reverse alphabetical order, that have an 'e' as the second letter or end with an 's':"
+
+echo "$($PSQL "SELECT course FROM courses WHERE course LIKE '_e%' OR course LIKE '%s' ORDER BY course DESC LIMIT 5")"
+
+echo -e "\nAverage GPA of all students rounded to two decimal places:"
+
+echo "$($PSQL "SELECT ROUND(AVG(gpa), 2) FROM students")"
+
+echo -e "\nMajor ID, total number of students in a column named 'number_of_students', and average GPA rounded to two decimal places in a column name 'average_gpa', for each major ID in the students table having a student count greater than 1:"
+
+echo "$($PSQL "SELECT major_id, COUNT(*) AS number_of_students, ROUND(AVG(gpa), 2) AS average_gpa FROM students GROUP BY major_id HAVING COUNT(*) > 1")"
+
+echo -e "\nList of majors, in alphabetical order, that either no student is taking or has a student whose first name contains a case insensitive 'ma':"
+
+echo "$($PSQL "SELECT major FROM majors FULL JOIN students ON majors.major_id = students.major_id WHERE first_name ILIKE '%ma%' OR student_id IS NULL ORDER BY major")"
+
+echo -e "\nList of unique courses, in reverse alphabetical order, that no student or 'Obie Hilpert' is taking:"
+
+echo "$($PSQL "SELECT DISTINCT course FROM courses FULL JOIN majors_courses USING(course_id) FULL JOIN students USING(major_id) WHERE student_id IS NULL OR first_name = 'Obie' ORDER BY course DESC")"
+
+echo -e "\nList of courses, in alphabetical order, with only one student enrolled:"
+
+echo "$($PSQL "SELECT course FROM courses FULL JOIN majors_courses USING(course_id) FULL JOIN students USING(major_id) GROUP BY course HAVING COUNT(student_id) = 1 ORDER BY course")"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+these are examples of using the commands 
