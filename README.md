@@ -851,3 +851,95 @@ echo "$($PSQL "SELECT course FROM courses FULL JOIN majors_courses USING(course_
 
 
 these are examples of using the commands 
+
+
+
+
+
+
+
+
+
+
+
+A single > will create or overwrite the file
+while >> will make it so you add to the file
+
+
+
+camper: /project$ echo Yujun | ./script.sh
+Hello Yujun
+./script.sh: line 6: bad_command: command not found
+
+camper: /project$ ./script.sh
+Yujun
+Hello Yujun
+./script.sh: line 6: bad_command: command not found
+
+same outputs, the first one doesnt ask for an input
+
+
+
+This now redirects the error to a different file
+camper: /project$ echo Yujun | ./script.sh 2> stderr.txt
+Hello Yujun
+camper: /project$ 
+
+
+This time, it didnt respon with anything, this is because it redirected all the things to different files
+camper: /project$ echo Yujun | ./script.sh 2>stderr.txt > stdout.txt
+camper: /project$ 
+
+
+this is giving the input of name.txt to script.sh, which lets script process it
+camper: /project$ ./script.sh < name.txt
+Hello
+./script.sh: line 6: bad_command: command not found
+
+
+
+
+./script.sh < name.txt 2> stderr.txt > stdout.txt
+this is giving the input of name.txt to script.sh, which then gives the error to stderr.txt and the result to stdout.txt
+
+
+
+
+wc can be used on a file, it will give the byte count without flags
+wc stands for word count
+
+-l flag to only output how many lines are in the file.
+-w flag to only output how many words are in the file.
+-m flag to only output how many characters are in the file.
+
+
+
+
+echo "~~ kitty_ipsum_1.txt info ~~" > kitty_info.txt
+
+this will put the text "~~ kitty_ipsum_1.txt info ~~" without quotations into the file kitty_info.txt, it will actually overwrite it, meaning it will create a new kitty_info.txt or rewrite the current one
+
+
+echo -e "\nNumber of lines:" >> kitty_info.txt
+or you can use >> which adds the line to the file instead of rewriting the entire file
+
+
+cat kitty_ipsum_1.txt | wc -l >> kitty_info.txt
+this concatates kitty_ipsum_1.txt and pipes it to wc -l, which finds out how many lines are inside it, then adds it to kitty_info.txt
+
+
+
+wc -m < kitty_ipsum_1.txt >> kitty_info.txt
+cat kitty_ipsum_1.txt | wc -m >> kitty_info.txt
+BOTH OF THESE achieve similar results. They're just different ways of doing it. 
+
+
+
+grep command is a command to find patterns in text files
+grep can use regex (regular expressions)
+
+grep flags:
+--color: the pattern text will be colored
+-n: shows the line that the pattern is seen on
+-c: counts how many lines the pattern shows up
+-o: puts each match on their own line
