@@ -932,6 +932,8 @@ this concatates kitty_ipsum_1.txt and pipes it to wc -l, which finds out how man
 wc -m < kitty_ipsum_1.txt >> kitty_info.txt
 cat kitty_ipsum_1.txt | wc -m >> kitty_info.txt
 BOTH OF THESE achieve similar results. They're just different ways of doing it. 
+the first one is called redirection
+the second one is called pipe
 
 
 
@@ -943,3 +945,85 @@ grep flags:
 -n: shows the line that the pattern is seen on
 -c: counts how many lines the pattern shows up
 -o: puts each match on their own line
+
+
+examples:
+grep --color 'meow[a-z]*' kitty_ipsum_2.txt
+grep <flag> '<pattern>' <filename>
+
+
+
+
+sed can replace text like this:
+sed 's/<pattern_to_replace>/<text_to_replace_it_with>/' <filename>
+By default, it won't replace the text in the file. It will output it to stdout
+
+it is case sensitive
+but you can use regex flags after it 
+
+
+
+grep -n 'meow[a-z]*' kitty_ipsum_1.txt | sed 's/[0-9]/1/'
+you can even use sed to target the line number outputs.
+
+
+
+sed flags:
+-E: allows you to use extended regex 
+
+
+grep -n 'meow[a-z]*' kitty_ipsum_1.txt | sed -E 's/([0-9]+).*/\1/'
+
+lists only the row numbers that matches the pattern.
+
+
+
+
+
+'s/([0-9]+).*/\1/'
+sed pattern that:
+
+
+s/.../.../:
+The s stands for "substitute."
+It follows the format: s/<pattern>/<replacement>/.
+It replaces text that matches <pattern> with <replacement>.
+
+
+([0-9]+):
+This is a regular expression capture group (denoted by parentheses ()).
+[0-9] matches any digit (0 to 9).
+[0-9]+ matches one or more digits (e.g., 123, 4567).
+
+
+.*:
+. matches any single character except a newline.
+* means "zero or more" of the preceding character.
+Together, .* matches the rest of the line after the digits.
+
+
+\1:
+This refers to the first capture group (the digits matched by ([0-9]+)).
+In the replacement part, \1 inserts the value captured in the first group.
+
+
+What It Does:
+Matches a line that starts with digits (e.g., 123abc or 456 something).
+Captures only the digits (123 or 456) using ([0-9]+).
+Replaces the entire line with just the digits captured by \1.
+
+
+
+
+
+
+You can replace many patterns using sed like this: sed 's/<pattern_1>/<replacement_1>/; s/<pattern_2>/<replacement_2>/'
+you need the semi-colon between the two replacement patterns and they both need to be wrapped in the quotes
+
+
+
+
+
+diff is a command to view the difference between two files. You can use it like this: diff <file_1> <file_2>
+diff flags:
+--color: colors the lines red or green. The red lines are lines that aren't in the second file, and the green lines are what they were replaced with. 
