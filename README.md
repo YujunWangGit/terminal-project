@@ -1327,3 +1327,50 @@ MAIN_MENU
 
 
 
+
+
+SERVICES=$($PSQL "SELECT * FROM services")
+
+echo "$SERVICES" | while read ID BAR SERVICE 
+do 
+  echo "$ID) $SERVICE"
+done
+
+
+and
+
+
+
+SERVICES=$($PSQL "SELECT * FROM services")
+
+echo $SERVICES | while read ID BAR SERVICE 
+do 
+  echo "$ID) $SERVICE"
+done
+
+
+they have a huge difference, even though one simply has no "" around $SERVICES, it causes everything to change.
+
+
+the first output is:
+
+camper: /project$ ./salon.sh
+
+~~~~~ MY SALON ~~~~~
+
+Welcome to My Salon, how can I help you?
+1) cut 2 | color 3 | dry
+
+
+
+while the second output is:
+
+~~~~~ MY SALON ~~~~~
+
+Welcome to My Salon, how can I help you?
+1) cut
+2) color
+3) dry
+
+
+the "" will print it out on multiple lines.
