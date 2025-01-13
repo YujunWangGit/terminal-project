@@ -1374,3 +1374,44 @@ Welcome to My Salon, how can I help you?
 
 
 the "" will print it out on multiple lines.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+nano
+
+
+you can use:
+nano <filename>
+
+to open the file in nano
+
+
+
+and you can test the file by using:
+bash <filename>
