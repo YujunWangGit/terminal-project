@@ -1415,3 +1415,208 @@ to open the file in nano
 
 and you can test the file by using:
 bash <filename>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+learning git:
+
+you can turn a folder into a git reposity by typing "git init" from the folder (repository)
+to check if it worked, you can use "ls -a", which lists and uses a flag to see hidden details.
+
+
+
+use "git status" to see the status of where you are in this repository
+
+
+
+git has main branches and other branches
+
+You can create and go to a new branch with "git checkout -b new_branch" dont actually type new_branch, but type in the name of it
+The -b stands for "branch"
+
+
+
+
+example here:
+
+camper: /sql_reference$ touch README.md 
+camper: /sql_reference$ git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        README.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+camper: /sql_reference$ git add README.md
+camper: /sql_reference$ git status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   README.md
+
+camper: /sql_reference$ 
+
+
+
+
+"git add <filename>":
+this adds it to changes that are waiting to be commited, which is the "staging area"
+
+
+you must commit it for the changes to be added to git
+
+
+
+to commit:
+you can use git commit -m "Initial commit". The -m stands for "message". YOU can place ANYTHING in the "Initial commit" area, it's just a message to remind you or tell you what the commit is for
+Often times, the first commit of a repo will have the message "Initial commit"
+
+When you make a commit, whatever is in the staging area will be added to your git history
+if you check git status after that, it will show nothing in staging area
+Your "working tree" will be clean, the files were committed and there's no other new changes that git recognizes. 
+
+
+
+you can see your git commit history by running command "git log"
+
+
+
+
+
+
+
+
+"git diff" is a command that shows the differences
+
+
+
+
+
+Commit messages often start with fix: or feat:, among others, to help people understand what your commit was for. 
+feat means feature, ususally adding a feature
+fix means fix, usually fixing a bug
+
+
+
+you can add branches by doing:
+git branch <name> 
+
+
+
+you can use "git checkout <branchname>" to switch to a branch
+
+
+
+
+you can commit to a side branch and then go back to the main branch. all the changes from the side branch wont be there.
+
+
+you can view all branches by doing:
+git branch
+
+
+
+
+
+You can use "git merge <branch_name>" to bring changes from a branch into the branch you are currently on
+
+
+merging a branch doesnt automatically delete the side branch. you must use command:
+"git branch -d branch_name"
+
+
+
+
+you can add a branch and THEN switch to that branch by using command:
+"git checkout -b branch_name"
+
+
+
+
+
+
+
+
+
+
+
+
+
+The process is to create a branch, make the changes you want, commit them, and then merge the changes into branch you started on.
+
+you can use "git add ." to add all files to staging area
+
+
+
+
+
+
+if you ever have changes to the main branch after you cloned the branch, you need to rebase the branch you're working on against the main branch. Rebasing will allow the branch to be updated, you can do that by:
+"git rebase <mainbranchname>"
+
+
+
+git rebase --continue 
+can be used after you solve conlficts that arise while you run rebase
+
+
+
+
+you can use git stash to stash something you were working on. stashes wont be in your status.
+
+you can see your stash by saying "git stash list"
+
+you can use "git stash pop" to use that stashed item
+once you pop it, it wont be in the stash list anymore
+
+you can use the stash without removing it form the stash list by using "git stash apply"
+
+
+
+git stash show <stashname>
+to view specific stash
+
+
+-p is a flag to show what changed exactly during the stash
+
+you can drop stashes by doing "git stash drop <name>"
+
+
