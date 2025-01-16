@@ -1620,3 +1620,49 @@ to view specific stash
 you can drop stashes by doing "git stash drop <name>"
 
 
+
+
+
+
+you can undo a commit by "going back in time"
+
+using the "git reset HEAD~1" command HEAD~1 means the last commit, and HEAD~2 can mean the last 2 commits
+or "git revert HEAD"
+
+
+1. git reset HEAD~1
+What it does: It "rewinds" your branch to the state before the most recent commit. This completely removes the commit, including its changes (or optionally keeps them as uncommitted changes).
+Options:
+Soft Reset (git reset --soft HEAD~1):
+Removes the last commit but keeps the changes staged (ready for a new commit).
+Mixed Reset (git reset --mixed HEAD~1):
+Removes the last commit and unstages the changes (leaves them as modified but not staged).
+Hard Reset (git reset --hard HEAD~1):
+Completely removes the last commit and discards the changes. Be cautious—this is irreversible.
+
+
+
+Feature                  git reset                           git revert                          
+------------------------- ---------------------------------- ----------------------------------
+History Preservation     Modifies history (destructive)     Keeps history intact (non-destructive)
+Impact on Collaboration  Avoid in shared branches           Safe for shared branches           
+Discard Changes?         Can discard changes completely     Changes are undone in a new commit
+
+
+
+
+
+
+
+
+git rebase --interactive --root
+
+you can use this to go into nano and edit the commit log
+
+
+
+
+by adding the name of a file to a .gitignore folder, it wont be tracked by git
+
+
+you can squash commits together into one line for easier readability
