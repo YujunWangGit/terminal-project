@@ -1666,3 +1666,71 @@ by adding the name of a file to a .gitignore folder, it wont be tracked by git
 
 
 you can squash commits together into one line for easier readability
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sql 
+
+UPDATE elements
+SET symbol = UPPER(SUBSTRING(symbol, 1, 1)) || SUBSTRING(symbol, 2);
+
+
+
+Explanation
+UPPER(SUBSTRING(symbol, 1, 1)):
+Extracts the first character of the symbol column and converts it to uppercase.
+SUBSTRING(symbol, 2):
+Extracts the rest of the string starting from the second character.
+||:
+Concatenates the uppercase first character with the rest of the string unchanged.
+
+
+
+
+FLOAT data type will remove all trailing zeros
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+git
+
+git commit --amend
+
+
+you can edit the comment of the last commit you made
